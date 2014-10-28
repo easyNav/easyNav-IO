@@ -82,20 +82,18 @@ class Voice(object):
 					del startNodeBuff[:]
 					del endNodeBuff[:]
 
+				elif (strInput == '*3'):
+					self.speaker.say("Stopping previous navigation")
 
+					endNodeBuff=[]
 
-			elif (strInput == '*3'):
-				self.speaker.say("Stopping previous navigation")
+					self.speaker.say("Key in destination ID")
+					endNodeBuff = keypad.getInput()
 
-				endNodeBuff=[]
+					del endNodeBuff[:]
 
-				self.speaker.say("Key in destination ID")
-				endNodeBuff = keypad.getInput()
-
-				del endNodeBuff[:]
-
-			elif (strInput == '*4'):
-				self.speaker.say("Goodbye!")
+				elif (strInput == '*4'):
+					self.speaker.say("Goodbye!")
 
 		except:
 			pass

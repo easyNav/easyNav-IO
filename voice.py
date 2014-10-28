@@ -20,7 +20,7 @@ class Voice(object):
 
 		self.inputBuffer =[]
 
-	def presentMenu():
+	def presentMenu(self):
 		self.speaker.say("Key * 1 # to choose map and level and locations")
 		self.speaker.say("Key * 2 # to choose locations")
 		self.speaker,say("Key * 3 # change destination")

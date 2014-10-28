@@ -56,8 +56,8 @@ class Keypad(object):
 
 
 def runMain():
-	voice = Voice()
-	voice.start()
+	keypad = Keypad()
+	keypad.getInput()
 
 if __name__ == '__main__':
     runMain()

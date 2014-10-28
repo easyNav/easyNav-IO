@@ -31,6 +31,8 @@ def getInput():
 
 
 	try:
+		del inputId[:] #clear buffer
+
 		while(True):
 			for j in range(3):
 				GPIO.output(COL[j], 0)
@@ -42,12 +44,10 @@ def getInput():
 							inputId.append(MATRIX[i][j])
 						else:
 							print inputId
-							temp = inputId
-							del inputId[:] #clear buffer
-							
+
 							while(GPIO.input(ROW[i]) == 0):
 								pass
-							return temp    #break infinite loop
+							return inputId    #break infinite loop
 							
 
 						while(GPIO.input(ROW[i]) == 0):

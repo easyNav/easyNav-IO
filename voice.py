@@ -23,19 +23,19 @@ class Voice(object):
 	def presentMenu(self):
 		self.speaker.say("Key * 1 # to choose map and level and locations")
 		self.speaker.say("Key * 2 # to choose locations")
-		self.speaker.say("Key * 3 # change destination")
+		self.speaker.say("Key * 3 # to change destination")
 		self.speaker.say("Key * 4 # to end")
 
 	def start(self):
 		
 		#present menu
-		self.presentMenu();
+		#self.presentMenu();
 
 		#keep listening for keypad activity
-
 		try:
 			while(1):
 				self.inputBuffer = keypad.getInput()
+				print "in infinite"
 
 				strInput = ''.join(self.inputBuffer)
 
@@ -43,7 +43,7 @@ class Voice(object):
 					buildingBuf = []
 					levelBuff=[]
 					startNodeBuff=[]
-					endNodeBuff=[]
+					endNodeBuff=[]	
 
 					self.speaker.say("Key in building ID")
 					buildingBuf = keypad.getInput()

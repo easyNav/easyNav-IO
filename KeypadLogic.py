@@ -27,8 +27,6 @@ class Keypad(object):
 			GPIO.setup(self.ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP) #input set as high
 
 	def getInput(self):
-
-
 		try:
 			while(True):
 				for j in range(3):

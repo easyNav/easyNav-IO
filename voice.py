@@ -4,6 +4,7 @@ from easyNav_pi_dispatcher import DispatcherClient
 import json
 import speaker 
 import KeypadLogic
+import time.
 
 
 class Voice(object):
@@ -36,9 +37,11 @@ class Voice(object):
 			while(1):
 				print "before getInput"
 				self.inputBuffer = KeypadLogic.getInput()
+
 				print "in infinite"
 
 				strInput = ''.join(self.inputBuffer)
+				print strInput
 
 				if (strInput == '*1'):
 					buildingBuf = []

@@ -32,10 +32,12 @@ class Voice(object):
 		#self.presentMenu();
 
 		#keep listening for keypad activity
+		print "in start"
 		try:
+			print "try statrement"
 			while(1):
 				self.inputBuffer = keypad.getInput()
-				print "in infinite"
+				print "in infinite	"
 
 				strInput = ''.join(self.inputBuffer)
 

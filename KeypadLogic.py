@@ -48,9 +48,17 @@ class Keypad(object):
 
 							while(GPIO.input(self.ROW[i]) == 0):
 								pass
-								
+
 					GPIO.output(self.COL[j], 1)
 
 		except KeyboardInterrupt:
 			GPIO.cleanup()
+
+
+def runMain():
+	voice = Voice()
+	voice.start()
+
+if __name__ == '__main__':
+    runMain()
 	

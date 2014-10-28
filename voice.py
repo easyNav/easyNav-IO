@@ -36,6 +36,7 @@ class Voice(object):
 		try:
 			print "try statrement"
 			while(1):
+				print "before getInput"
 				self.inputBuffer = keypad.getInput()
 				print "in infinite"
 

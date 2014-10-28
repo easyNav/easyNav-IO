@@ -44,6 +44,9 @@ def getInput():
 							print inputId
 							temp = inputId
 							del inputId[:] #clear buffer
+							
+							while(GPIO.input(ROW[i]) == 0):
+								pass
 							return temp    #break infinite loop
 							
 

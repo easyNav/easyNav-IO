@@ -29,7 +29,7 @@ class Voice(object):
 	def start(self):
 		
 		#present menu
-		presentMenu();
+		self.presentMenu();
 
 		#keep listening for keypad activity
 

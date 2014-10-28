@@ -17,8 +17,7 @@ class Keypad(object):
 		COL=[15,13,11]
 		inputId = [] 
 		temp=[]
-
-	def getInput(self):
+		
 		for j in range(3):
 			GPIO.setup(COL[j], GPIO.OUT)
 			GPIO.output(COL[j], 1)    #set output as high
@@ -26,6 +25,8 @@ class Keypad(object):
 
 		for i in range(4):
 			GPIO.setup(ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP) #input set on high
+
+	def getInput(self):
 
 		try:
 			while(True):

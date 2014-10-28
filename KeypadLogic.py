@@ -24,16 +24,14 @@ class Keypad(object):
 
 
 		for i in range(4):
-			GPIO.setup(self.ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP) #input set on high
+			GPIO.setup(self.ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP) #input set as high
 
 	def getInput(self):
 
-		print "In Keypad get function"
 
 		try:
 			while(True):
 				for j in range(3):
-					print "in GPIO loop"
 					GPIO.output(self.COL[j], 0)
 
 					for i in range(4):

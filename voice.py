@@ -37,7 +37,7 @@ class Voice(object):
 			print "try statrement"
 			while(1):
 				self.inputBuffer = keypad.getInput()
-				print "in infinite	"
+				print "in infinite"
 
 				strInput = ''.join(self.inputBuffer)
 

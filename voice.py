@@ -4,7 +4,6 @@ from easyNav_pi_dispatcher import DispatcherClient
 import json
 import speaker 
 import KeypadLogic
-import time.
 
 
 class Voice(object):

@@ -28,10 +28,12 @@ class Keypad(object):
 
 	def getInput(self):
 
+		print "In Keypad get function"
+
 		try:
 			while(True):
 				for j in range(3):
-
+					print "in GPIO loop"
 					GPIO.output(self.COL[j], 0)
 
 					for i in range(4):

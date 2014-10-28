@@ -9,8 +9,6 @@ import KeypadLogic
 class Voice(object):
 	def __init__(self): 
 
-		#get instance of keypad 
-		keypad = KeypadLogic.Keypad()
 
 		self.speaker = speaker.newSpeaker()
 

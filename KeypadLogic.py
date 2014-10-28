@@ -3,7 +3,7 @@ import time
 
 
 
-def getInput(self):
+def getInput():
 
 
 	GPIO.setmode(GPIO.BOARD)

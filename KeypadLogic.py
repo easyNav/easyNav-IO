@@ -2,61 +2,60 @@ import RPi.GPIO as GPIO
 import time
 
 
-class Keypad(object):
-	def __init__(self):
-		GPIO.setmode(GPIO.BOARD)
 
-		self.MATRIX=[['1','2','3'],
-				['4','5','6'],
-				['7','8','9'],
-				['*','0','#']]
-
-		#GPIO Pin Numbers
-
-		self.ROW=[8,10,12,16]
-		self.COL=[15,13,11]
-		self.inputId = [] 
-		self.temp=[]
-		
-		for j in range(3):
-			GPIO.setup(self.COL[j], GPIO.OUT)
-			GPIO.output(self.COL[j], 1)    #set output as high
+def getInput(self):
 
 
-		for i in range(4):
-			GPIO.setup(self.ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP) #input set as high
+	GPIO.setmode(GPIO.BOARD)
 
-	def getInput(self):
-		try:
-			while(True):
-				for j in range(3):
-					GPIO.output(self.COL[j], 0)
+	MATRIX=[['1','2','3'],
+			['4','5','6'],
+			['7','8','9'],
+			['*','0','#']]
 
-					for i in range(4):
-						if(GPIO.input(self.ROW[i]) == 0):   # a key is pressed
-							print self.MATRIX[i][j]
-							if(self.MATRIX[i][j] != '#'):			 	#not the end yet
-								self.inputId.append(self.MATRIX[i][j])
-							else:
-								print self.inputId
-								self.temp = self.inputId
-								del self.inputId[:] #clear buffer
-								return self.temp    #break infinite loop
-								
+	#GPIO Pin Numbers
 
-							while(GPIO.input(self.ROW[i]) == 0):
-								pass
-
-					GPIO.output(self.COL[j], 1)
-
-		except KeyboardInterrupt:
-			GPIO.cleanup()
+	ROW=[8,10,12,16]
+	COL=[15,13,11]
+	inputId = [] 
+	temp=[]
+	
+	for j in range(3):
+		GPIO.setup(COL[j], GPIO.OUT)
+		GPIO.output(COL[j], 1)    #set output as high
 
 
-def runMain():
-	keypad = Keypad()
-	keypad.getInput()
+	for i in range(4):
+		GPIO.setup(ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP) #input set as high
+
+
+
+	try:
+		while(True):
+			for j in range(3):
+				GPIO.output(COL[j], 0)
+
+				for i in range(4):
+					if(GPIO.input(ROW[i]) == 0):   # a key is pressed
+						print MATRIX[i][j]
+						if(MATRIX[i][j] != '#'):			 	#not the end yet
+							inputId.append(MATRIX[i][j])
+						else:
+							print inputId
+							temp = inputId
+							del inputId[:] #clear buffer
+							return temp    #break infinite loop
+							
+
+						while(GPIO.input(ROW[i]) == 0):
+							pass
+
+				GPIO.output(COL[j], 1)
+
+	except KeyboardInterrupt:
+		GPIO.cleanup()
+
 
 if __name__ == '__main__':
-    runMain()
+    getInput()
 	

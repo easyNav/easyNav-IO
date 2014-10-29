@@ -5,6 +5,7 @@ import json
 import speaker 
 import KeypadLogic
 import multiprocessing
+import time
 
 
 class Notifications(object):
@@ -24,7 +25,7 @@ class Notifications(object):
 		
 		#run notifier forever
 		while(1):
-			time.sleep(1)
+			time.sleep(0.1)
 
 
 	def attachEvents(self, mic):
@@ -137,7 +138,7 @@ class Voice(object):
 
 				elif (strInput == '*4'):
 					self.speaker.say("Goodbye!")
-				time.sleep(1)
+				time.sleep(0.1)
 		except:
 			pass
 
@@ -161,7 +162,7 @@ if __name__ == '__main__':
     p2.start()
 
     while(1):
-    	time.sleep(1)
+    	time.sleep(0.1)
 
     p1.join()
     p2.join()

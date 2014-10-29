@@ -54,6 +54,7 @@ def getInput():
 							pass
 
 				GPIO.output(COL[j], 1)
+			time.sleep(0.1)
 
 	except KeyboardInterrupt:
 		GPIO.cleanup()

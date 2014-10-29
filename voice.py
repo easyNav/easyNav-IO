@@ -79,8 +79,8 @@ class Voice(object):
 					strStart = ''.join(startNodeBuff)
 					strEnd = ''.join(endNodeBuff)
 
-					dispatcherClient.send(9003, "starting", int(strStart))
-					dispatcherClient.send(9001, "newPath", {"from":int(strStart), "to": int(strEnd)})
+					self.dispatcherClient.send(9003, "starting", int(strStart))
+					self.dispatcherClient.send(9001, "newPath", {"from":int(strStart), "to": int(strEnd)})
 
 					del startNodeBuff[:]
 					del endNodeBuff[:]

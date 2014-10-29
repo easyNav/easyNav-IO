@@ -161,7 +161,7 @@ if __name__ == '__main__':
     p2.start()
 
     while(1):
-    	pass
+    	time.sleep(1)
 
     p1.join()
     p2.join()

@@ -13,8 +13,8 @@ def getInput(mic):
 
 	#GPIO Pin Numbers
 
-	ROW=[8,10,12,16]
-	COL=[15,13,11]
+	ROW=[16,18,22,24]
+	COL=[7,5,3]
 	inputId = [] 
 	temp=[]
 	

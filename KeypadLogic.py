@@ -1,10 +1,8 @@
 import RPi.GPIO as GPIO
 import time
+import speaker
 
-
-
-def getInput():
-
+def getInput(mic):
 
 	GPIO.setmode(GPIO.BOARD)
 
@@ -41,12 +39,13 @@ def getInput():
 						print MATRIX[i][j]
 						if(MATRIX[i][j] != '#'):			 	#not the end yet
 							inputId.append(MATRIX[i][j])
+							mic.say(MATRIX[i][j])
 						else:
 							print inputId
 
 							while(GPIO.input(ROW[i]) == 0):
 								pass
-							return inputId    #break infinite loop
+							return inputId    #break out infinite loop
 							
 						while(GPIO.input(ROW[i]) == 0):
 							pass
@@ -59,5 +58,8 @@ def getInput():
 
 
 if __name__ == '__main__':
-    getInput()
+
+	Speaker = speaker.newSpeaker()
+    getInput(Speaker)
+
 	

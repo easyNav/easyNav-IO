@@ -72,7 +72,7 @@ class Voice(object):
 			print "try statrement"
 			while(1):
 				print "before getInput"
-				self.inputBuffer = KeypadLogic.getInput()
+				self.inputBuffer = KeypadLogic.getInput(self.speaker)
 
 				print "in infinite"
 
@@ -86,16 +86,16 @@ class Voice(object):
 					endNodeBuff=[]	
 
 					self.speaker.say("Key in building ID")
-					buildingBuf = KeypadLogic.getInput()
+					buildingBuf = KeypadLogic.getInput(self.speaker)
 
 					self.speaker.say("Key in level ID")
-					levelBuff = KeypadLogic.getInput()
+					levelBuff = KeypadLogic.getInput(self.speaker)
 
 					self.speaker.say("Key in start point ID")
-					startNodeBuff = KeypadLogic.getInput()
+					startNodeBuff = KeypadLogic.getInput(self.speaker)
 
 					self.speaker.say("Key in destination ID")
-					endNodeBuff = KeypadLogic.getInput()
+					endNodeBuff = KeypadLogic.getInput(self.speaker)
 
 					del buildingBuf[:]
 					del levelBuff[:]
@@ -108,13 +108,13 @@ class Voice(object):
 
 
 					self.speaker.say("Key in start point ID")
-					startNodeBuff = KeypadLogic.getInput()
+					startNodeBuff = KeypadLogic.getInput(self.speaker)
 					strStart = ''.join(startNodeBuff)
 					self.speaker.say("you have entered " + strStart)
 
 
 					self.speaker.say("Key in destination ID")
-					endNodeBuff = KeypadLogic.getInput()
+					endNodeBuff = KeypadLogic.getInput(self.speaker)
 					strEnd = ''.join(endNodeBuff)
 					self.speaker.say("you have entered " + strEnd)
 
@@ -134,7 +134,7 @@ class Voice(object):
 					endNodeBuff=[]
 
 					self.speaker.say("Key in destination ID")
-					endNodeBuff = KeypadLogic.getInput()
+					endNodeBuff = KeypadLogic.getInput(self.speaker)
 
 					del endNodeBuff[:]
 

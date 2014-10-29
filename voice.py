@@ -109,12 +109,14 @@ class Voice(object):
 
 					self.speaker.say("Key in start point ID")
 					startNodeBuff = KeypadLogic.getInput()
+					strStart = ''.join(startNodeBuff)
+					self.speaker.say("you have entered " + strStart)
+
 
 					self.speaker.say("Key in destination ID")
 					endNodeBuff = KeypadLogic.getInput()
-
-					strStart = ''.join(startNodeBuff)
 					strEnd = ''.join(endNodeBuff)
+					self.speaker.say("you have entered " + strEnd)
 
 					try:
 

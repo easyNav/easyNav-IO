@@ -29,7 +29,6 @@ def getInput():
 		GPIO.setup(ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP) #input set as high
 
 
-
 	try:
 		del inputId[:] #clear buffer
 
@@ -49,7 +48,6 @@ def getInput():
 								pass
 							return inputId    #break infinite loop
 							
-
 						while(GPIO.input(ROW[i]) == 0):
 							pass
 

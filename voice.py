@@ -4,6 +4,42 @@ from easyNav_pi_dispatcher import DispatcherClient
 import json
 import speaker 
 import KeypadLogic
+import multiprocessing
+
+
+class Notifications(object):
+
+	def __init__(self):
+		self.speaker = speaker.newSpeaker()
+
+        #interprocess 
+		self.DISPATCHER_PORT = 9002
+		self.dispatcherClient = DispatcherClient(port=self.DISPATCHER_PORT)
+
+        ## Attach event listeners
+		self.attachEvents(self.speaker)
+
+	def start(self):
+		self.dispatcherClient.start()
+		
+		#run notifier forever
+		while(1):
+			pass
+
+
+	def attachEvents(self, mic):
+        ## clear all signals
+		smokesignal.clear()
+		text = ""
+		@smokesignal.on('say')
+		def onSay(args):
+			print "Info from Nav"
+			infoFromNav = eval(args.get('payload'))
+			print infoFromNav
+			infotosay = infoFromNav["text"]
+			print infotosay
+			print "Info from Nav before Mic"
+			mic.say(infotosay)
 
 
 class Voice(object):
@@ -106,10 +142,26 @@ class Voice(object):
 			pass
 
 
-
-def runMain():
+def runVoice(ns):
 	voice = Voice()
 	voice.start()
 
+def runNotifications(ns):
+	notifications = Notifications()
+	notifications.start()
+
+
 if __name__ == '__main__':
-    runMain()
+    manager = multiprocessing.Manager()
+    ns = manager.Namespace()
+
+    p1 = multiprocessing.Process(target=runVoice, args=(ns,))
+    p1.start()
+    p2 = multiprocessing.Process(target=runNotifications, args=(ns,))
+    p2.start()
+
+    while(1):
+    	pass
+
+    p1.join()
+    p2.join()

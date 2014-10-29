@@ -24,7 +24,7 @@ class Notifications(object):
 		
 		#run notifier forever
 		while(1):
-			pass
+			time.sleep(1)
 
 
 	def attachEvents(self, mic):
@@ -137,7 +137,7 @@ class Voice(object):
 
 				elif (strInput == '*4'):
 					self.speaker.say("Goodbye!")
-
+				time.sleep(1)
 		except:
 			pass
 

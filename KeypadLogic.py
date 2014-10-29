@@ -60,6 +60,6 @@ def getInput(mic):
 if __name__ == '__main__':
 
 	Speaker = speaker.newSpeaker()
-    getInput(Speaker)
+	getInput(Speaker)
 
 	

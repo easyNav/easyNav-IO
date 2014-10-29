@@ -49,16 +49,16 @@ class Voice(object):
 					endNodeBuff=[]	
 
 					self.speaker.say("Key in building ID")
-					buildingBuf = keypad.getInput()
+					buildingBuf = KeypadLogic.getInput()
 
 					self.speaker.say("Key in level ID")
-					levelBuff = keypad.getInput()
+					levelBuff = KeypadLogic.getInput()
 
 					self.speaker.say("Key in start point ID")
-					startNodeBuff = keypad.getInput()
+					startNodeBuff = KeypadLogic.getInput()
 
 					self.speaker.say("Key in destination ID")
-					endNodeBuff = keypad.getInput()
+					endNodeBuff = KeypadLogic.getInput()
 
 					del buildingBuf[:]
 					del levelBuff[:]
@@ -71,10 +71,10 @@ class Voice(object):
 
 
 					self.speaker.say("Key in start point ID")
-					startNodeBuff = keypad.getInput()
+					startNodeBuff = KeypadLogic.getInput()
 
 					self.speaker.say("Key in destination ID")
-					endNodeBuff = keypad.getInput()
+					endNodeBuff = KeypadLogic.getInput()
 
 					strStart = ''.join(startNodeBuff)
 					strEnd = ''.join(endNodeBuff)
@@ -91,7 +91,7 @@ class Voice(object):
 					endNodeBuff=[]
 
 					self.speaker.say("Key in destination ID")
-					endNodeBuff = keypad.getInput()
+					endNodeBuff = KeypadLogic.getInput()
 
 					del endNodeBuff[:]
 

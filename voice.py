@@ -25,7 +25,7 @@ class Voice(object):
 		self.speaker.say("Key * 4 # to end")
 
 	def start(self):
-		
+		dispatcherClient.start()
 		#present menu
 		#self.presentMenu();
 

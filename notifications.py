@@ -2,7 +2,7 @@
 import smokesignal
 from easyNav_pi_dispatcher import DispatcherClient
 import json
-from client import speaker 
+import speaker 
 
 class Notifications(object):
 

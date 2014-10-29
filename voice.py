@@ -79,8 +79,12 @@ class Voice(object):
 					strStart = ''.join(startNodeBuff)
 					strEnd = ''.join(endNodeBuff)
 
-					self.dispatcherClient.send(9003, "starting", int(strStart))
-					self.dispatcherClient.send(9001, "newPath", {"from":int(strStart), "to": int(strEnd)})
+					try:
+
+						self.dispatcherClient.send(9003, "starting", int(strStart))
+						self.dispatcherClient.send(9001, "newPath", {"from":int(strStart), "to": int(strEnd)})
+					except ValueError:
+						self.speaker.say("Error, key in a proper ID")
 
 					del startNodeBuff[:]
 					del endNodeBuff[:]

@@ -6,6 +6,8 @@ import speaker
 import KeypadLogic
 import multiprocessing
 import time
+import GetLocations
+
 
 
 class Notifications(object):
@@ -44,8 +46,10 @@ class Notifications(object):
 
 
 class Voice(object):
-	def __init__(self): 
 
+	#HOST_ADDR = "http://localhost:1337/"
+
+	def __init__(self): 
 
 		self.speaker = speaker.newSpeaker()
 
@@ -55,11 +59,56 @@ class Voice(object):
 
 		self.inputBuffer =[]
 
+		#update locations
+		self.getLocation = GetLocations.Locations()
+		self.getLocation.getLoc()
+
 	def presentMenu(self):
 		self.speaker.say("Key * 1 # to choose map and level and locations")
 		self.speaker.say("Key * 2 # to choose locations")
 		self.speaker.say("Key * 3 # to change destination")
 		self.speaker.say("Key * 4 # to end")
+
+	def getLocations():
+		#get a list of locations
+		filename = "locations.txt"
+		locationFile = open(filename, "r")
+		print "Opened file!!"
+
+		locations = []
+		for line in locationFile.readlines():
+			line = line.replace("\n", "")
+			locations.append(line)
+		print locations
+		return locations
+
+	def getCoord(index):
+		filename = "CoordinateFile.txt"
+		CoordinateFile = open(filename, "r")
+		ctr = 0
+		startCoord = "" 
+
+		for line in CoordinateFile.readlines():
+			if ctr == index:
+				line = line.replace("\n", "")
+				startCoord = line
+
+			ctr+=1
+
+		return startCoord
+
+	def getSUIDIndex(SUID):
+		filename = "SUIDFile.txt"
+		SUIDFile = open(filename, "r")
+		index = 0
+
+		for line in SUIDFile.readlines():
+			line = line.replace("\n", "")
+			if int(line) == SUID:
+				return index
+			ctr+=1
+
+		return -1
 
 	def start(self):
 		self.dispatcherClient.start()
@@ -68,7 +117,9 @@ class Voice(object):
 
 		#keep listening for keypad activity
 		print "in start"
+
 		try:
+
 			print "try statrement"
 			while(1):
 				print "before getInput"
@@ -118,9 +169,15 @@ class Voice(object):
 					strEnd = ''.join(endNodeBuff)
 					self.speaker.say("you have entered " + strEnd)
 
+					#get start coord to send to Cruncher
+					fileIndex = self.getSUIDIndex(int(strStart))
+					startCoord = self.getCoord(fileIndex)
+					print startCoord
+
+
 					try:
 
-						self.dispatcherClient.send(9003, "starting", int(strStart))
+						self.dispatcherClient.send(9003, "starting", startCoord)
 						self.dispatcherClient.send(9001, "newPath", {"from":int(strStart), "to": int(strEnd)})
 					except ValueError:
 						self.speaker.say("Error, key in a proper ID")

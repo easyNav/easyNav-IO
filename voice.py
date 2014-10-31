@@ -182,7 +182,7 @@ class Voice(object):
 
 					try:
 
-						self.dispatcherClient.send(9003, "starting", startCoord)
+						self.dispatcherClient.send(9003, "starting", eval(startCoord))
 						self.dispatcherClient.send(9001, "newPath", {"from":int(strStart), "to": int(strEnd)})
 					except ValueError:
 						self.speaker.say("Error, key in a proper ID")

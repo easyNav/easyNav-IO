@@ -98,8 +98,11 @@ class Voice(object):
 		return startCoord
 
 	def getSUIDIndex(SUID):
+		print "in method"
 		filename = "SUIDFile.txt"
+
 		SUIDFile = open(filename, "r")
+		print "Opened file"
 		index = 0
 
 		for line in SUIDFile.readlines():

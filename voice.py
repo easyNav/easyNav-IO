@@ -163,7 +163,7 @@ class Voice(object):
 					startNodeBuff = KeypadLogic.getInput(self.speaker)
 					strStart = ''.join(startNodeBuff)
 					self.speaker.say("you have entered " + strStart)
-
+					print strStart
 
 					self.speaker.say("Key in destination ID")
 					endNodeBuff = KeypadLogic.getInput(self.speaker)

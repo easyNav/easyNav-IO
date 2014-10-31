@@ -104,6 +104,7 @@ class Voice(object):
 
 		for line in SUIDFile.readlines():
 			line = line.replace("\n", "")
+			print line
 			if int(line) == SUID:
 				return index
 			ctr+=1

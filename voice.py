@@ -69,7 +69,7 @@ class Voice(object):
 		self.speaker.say("Key * 3 # to change destination")
 		self.speaker.say("Key * 4 # to end")
 
-	def getLocations():
+	def getLocations(self):
 		#get a list of locations
 		filename = "locations.txt"
 		locationFile = open(filename, "r")
@@ -82,7 +82,7 @@ class Voice(object):
 		print locations
 		return locations
 
-	def getCoord(index):
+	def getCoord(self, index):
 		filename = "CoordinateFile.txt"
 		CoordinateFile = open(filename, "r")
 		ctr = 0
@@ -97,7 +97,7 @@ class Voice(object):
 
 		return startCoord
 
-	def getSUIDIndex(SUID):
+	def getSUIDIndex(self, SUID):
 		print "in method"
 		filename = "SUIDFile.txt"
 
@@ -174,6 +174,7 @@ class Voice(object):
 					self.speaker.say("you have entered " + strEnd)
 
 					#get start coord to send to Cruncher
+					print "before getSUID"
 					fileIndex = self.getSUIDIndex(int(strStart))
 					startCoord = self.getCoord(fileIndex)
 					print startCoord

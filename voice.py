@@ -207,6 +207,7 @@ class Voice(object):
 					self.speaker.say("Please remember to switch off the shoe and bag switches...GoodBye")
 					os.system("sudo pkill -SIGTERM -f \"python\" ")
 					os.system("sudo pkill -SIGTERM -f \"start_node\" ")
+					os.system("sudo pkill -SIGTERM -f \"node\" ")
 					#os.system("sudo pkill -SIGTERM -f easyNav_pi_dispatcher")
 
 					#os.system("sudo pkill -SIGTERM -f ")

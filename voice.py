@@ -7,6 +7,7 @@ import KeypadLogic
 import multiprocessing
 import time
 import GetLocations
+import os
 
 
 
@@ -44,11 +45,11 @@ class Notifications(object):
 			print "Info from Nav before Mic"
 			mic.say(infotosay)
 
+	
 
 class Voice(object):
 
 	#HOST_ADDR = "http://localhost:1337/"
-
 	def __init__(self): 
 
 		self.speaker = speaker.newSpeaker()
@@ -179,7 +180,6 @@ class Voice(object):
 					startCoord = self.getCoord(fileIndex)
 					print startCoord
 
-
 					try:
 
 						self.dispatcherClient.send(9003, "starting", eval(startCoord))
@@ -201,7 +201,14 @@ class Voice(object):
 					del endNodeBuff[:]
 
 				elif (strInput == '*4'):
-					self.speaker.say("Goodbye!")
+					self.speaker.say("Hope you had a good journey!")
+					self.speaker.say("Ending all processes")
+					os.system("sudo pkill -SIGTERM -f easyNav_pi_nav")
+					#os.system("sudo pkill -SIGTERM -f easyNav_pi_dispatcher")
+
+					#os.system("sudo pkill -SIGTERM -f ")
+
+
 				time.sleep(0.1)
 		except:
 			pass

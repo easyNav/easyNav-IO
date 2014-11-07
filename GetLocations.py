@@ -71,9 +71,12 @@ class  Locations(object):
 				CoordinateFile.write('\n')
 			CoordinateFile.close()
 			
-		logging.info("Starting to retrieve locations")
-		r = requests.get(Locations.HOST_ADDR + "node")
-		print r.status_code
+		try:
+			logging.info("Starting to retrieve locations")
+			r = requests.get(Locations.HOST_ADDR + "node")
+			print r.status_code
+		except:
+			print "LocalHost network exception!"
 
 		locationList = []
 		SUIDList = []

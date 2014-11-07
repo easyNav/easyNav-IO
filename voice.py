@@ -205,11 +205,11 @@ class Voice(object):
 					self.speaker.say("Ending all processes, Please wait")
 					time.sleep(1)
 					self.speaker.say("Please remember to switch off the shoe and bag switches...GoodBye")
-					os.system("sudo pkill -SIGTERM -f \"python\" ")
-					#time.sleep(1)
-					#os.system("sudo pkill -SIGTERM -f \"start_node\" ")
-					time.sleep(1)
+					
 					os.system("sudo pkill -SIGTERM -f \"node\" ")
+					time.sleep(1)
+					os.system("sudo pkill -SIGTERM -f \"python\" ")
+					
 					#os.system("sudo pkill -SIGTERM -f easyNav_pi_dispatcher")
 
 					#os.system("sudo pkill -SIGTERM -f ")

@@ -202,8 +202,17 @@ class Voice(object):
 
 				elif (strInput == '*4'):
 					self.speaker.say("Hope you had a good journey!")
-					self.speaker.say("Ending all processes")
+					self.speaker.say("Ending all processes, Please wait")
 					os.system("sudo pkill -SIGTERM -f \"easyNav-pi-nav\" ")
+					os.system("sudo pkill -SIGTERM -f \"easyNav-pi-dispatcher\" ")
+					os.system("sudo pkill -SIGTERM -f \"cruncher.py\" ")
+					os.system("sudo pkill -SIGTERM -f \"serialmod.py\" ")
+					os.system("sudo pkill -SIGTERM -f \"alert.py\" ")
+					os.system("sudo pkill -SIGTERM -f \"node\" ")
+
+					self.speaker.say("Please remember to switch off the shoe and bag switches...GoodBye")
+
+					os.system("sudo pkill -SIGTERM -f \"voice.py\" ")
 					#os.system("sudo pkill -SIGTERM -f easyNav_pi_dispatcher")
 
 					#os.system("sudo pkill -SIGTERM -f ")

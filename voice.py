@@ -203,7 +203,7 @@ class Voice(object):
 				elif (strInput == '*4'):
 					self.speaker.say("Hope you had a good journey!")
 					self.speaker.say("Ending all processes")
-					os.system("sudo pkill -SIGTERM -f easyNav_pi_nav")
+					os.system("sudo pkill -SIGTERM -f \"easyNav_pi_nav\" ")
 					#os.system("sudo pkill -SIGTERM -f easyNav_pi_dispatcher")
 
 					#os.system("sudo pkill -SIGTERM -f ")

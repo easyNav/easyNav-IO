@@ -16,9 +16,9 @@ class Notifications(object):
 	def __init__(self):
 		self.speaker = speaker.newSpeaker()
 
-        #interprocess 
-		self.DISPATCHER_PORT = 9002
-		self.dispatcherClient = DispatcherClient(port=self.DISPATCHER_PORT)
+  #       #interprocess 
+		# self.DISPATCHER_PORT = 9002
+		# self.dispatcherClient = DispatcherClient(port=self.DISPATCHER_PORT)
 
         ## Attach event listeners
 		self.attachEvents(self.speaker)
@@ -201,18 +201,39 @@ class Voice(object):
 					del endNodeBuff[:]
 
 				elif (strInput == '*4'):
-					self.speaker.say("Hope you had a good journey!")
-					self.speaker.say("Ending all processes, Please wait")
-					time.sleep(1)
-					self.speaker.say("Please remember to switch off the shoe and bag switches...GoodBye")
-					
-					os.system("sudo pkill -SIGTERM -f \"node\" ")
-					time.sleep(1)
-					os.system("sudo pkill -SIGTERM -f \"python\" ")
-					
-					#os.system("sudo pkill -SIGTERM -f easyNav_pi_dispatcher")
+					self.speaker.say("Ending EasyNav, Are you sure?")
+					self.speaker.say("Key in 1 to confirm, 2 to cancel")
 
-					#os.system("sudo pkill -SIGTERM -f ")
+					option = KeypadLogic.getInput(self.speaker)
+
+					try:
+						if(option == '1'):
+							self.speaker.say("Hope you had a good journey!")
+							self.speaker.say("Ending all processes, Please wait")
+							time.sleep(1)
+							self.speaker.say("Please remember to switch off the shoe and bag switches...GoodBye")
+							
+							os.system("sudo pkill -SIGTERM -f \"node\" ")
+							time.sleep(1)
+							os.system("sudo sh shutdown.sh")
+						else:
+							self.speaker.say("Cancelling")
+
+					except ValueError:
+						self.speaker.say("Error, key in a proper ID")
+
+
+				#troubleshooting commands
+			elif (strInput == "*444"):
+				self.speaker.say("Finding ip")
+				os.system("ifconfig wlan0 | grep inet  > myIp.txt")
+
+				with open("myIp.txt") as IPText:
+					for line in IPText:
+						if "inet" in line:
+							self.mic.say(line)
+
+
 
 				time.sleep(0.1)
 		except:

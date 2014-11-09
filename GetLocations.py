@@ -77,6 +77,7 @@ class  Locations(object):
 			print r.status_code
 		except:
 			print "LocalHost network exception!"
+			
 
 		locationList = []
 		SUIDList = []

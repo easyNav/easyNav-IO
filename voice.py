@@ -270,6 +270,7 @@ class Voice(object):
 						for location in r.json():
 							print location
 							startCoord = location['loc']
+							print startCoord
 
 						self.dispatcherClient.send(9003, "starting", eval(startCoord))
 						self.dispatcherClient.send(9001, "newPath", {"from":startSUID, "to": endSUID})

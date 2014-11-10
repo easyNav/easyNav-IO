@@ -265,7 +265,7 @@ class Voice(object):
 						print endSUID
 						print "not int problem"
 						#get coord
-						r = requests.get(Voice.HOST_ADDR + "node/?SUID=" + startSUID)	
+						r = requests.get(Voice.HOST_ADDR + "node/?SUID=" + strStartSUID)	
 						print r
 						for location in r.json():
 							print location

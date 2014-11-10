@@ -264,7 +264,7 @@ class Voice(object):
 						endSUID = int(strEndSUID)
 
 						#get coord
-						r = requests.get(Locations.HOST_ADDR + "node?SUID=" +startSUID)
+						r = requests.get(Locations.HOST_ADDR + "node/?SUID=" +startSUID)
 						for location in r.json():
 							startCoord = location['loc']
 

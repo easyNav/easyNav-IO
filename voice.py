@@ -18,8 +18,8 @@ class Notifications(object):
 		self.speaker = speaker.newSpeaker()
 
   #       #interprocess 
-		# self.DISPATCHER_PORT = 9002
-		# self.dispatcherClient = DispatcherClient(port=self.DISPATCHER_PORT)
+		self.DISPATCHER_PORT = 9002
+		self.dispatcherClient = DispatcherClient(port=self.DISPATCHER_PORT)
 
 		## For collision detection: lock navigation until ready
 		self.collisionLocked = False

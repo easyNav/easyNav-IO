@@ -353,19 +353,22 @@ class Voice(object):
 
 					#troubleshooting commands
 				elif (strInput == "*444"):
-					self.speaker.say("Finding ip")
+					self.speaker.say("Finding i p")
 					os.system("ifconfig wlan0 | grep inet  > myIp.txt")
+					ipFound = False
 
 					with open("myIp.txt") as IPText:
 						for line in IPText:
 							if "inet" in line:
+								ipFound=True
 								print line
-								line = line.replace("inet", None)
-								line = line.replace("addr:", None)
 								lineDic = line.split(" ")
-								print lineDic
-								self.mic.say(lineDic[0])
-								print lineDic[0]
+								ipAddr = lineDic[1].replace("addr:", None)
+								self.speaker.say("The I P is " + ipAddr)
+								print lineDic[1]
+
+					if(not ipFound):
+						self.speaker.say("No i p assigned")
 
 					time.sleep(0.1)
 		except:

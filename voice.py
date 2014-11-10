@@ -334,9 +334,9 @@ class Voice(object):
 					self.speaker.say("Key in 1 to confirm, 2 to cancel")
 
 					option = KeypadLogic.getInput(self.speaker)
-					print option
+					strOption = ''.join(option)
 					try:
-						if(option == '1'):
+						if(strOption == '1'):
 							self.speaker.say("Hope you had a good journey!")
 							self.speaker.say("Ending all processes, Please wait")
 							time.sleep(1)

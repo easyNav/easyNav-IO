@@ -270,12 +270,13 @@ class Voice(object):
 
 						self.dispatcherClient.send(9003, "starting", eval(startCoord))
 						self.dispatcherClient.send(9001, "newPath", {"from":startSUID, "to": endSUID})
+						self.speaker.say("Routing!")
 
 					except:
 						self.speaker.say("Invalid ID")
 
 
-					self.speaker.say("Routing!")
+					
 
 
 					#find builiding map and get coordinates
@@ -333,7 +334,7 @@ class Voice(object):
 					self.speaker.say("Key in 1 to confirm, 2 to cancel")
 
 					option = KeypadLogic.getInput(self.speaker)
-
+					print option
 					try:
 						if(option == '1'):
 							self.speaker.say("Hope you had a good journey!")

@@ -363,6 +363,7 @@ class Voice(object):
 								line = line.replace("inet", "")
 								line = line.replace("addr:", "")
 								lineDic = line.split(" ")
+								print lineDic
 								self.mic.say(lineDic[0])
 								print lineDic[0]
 

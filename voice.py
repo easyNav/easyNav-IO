@@ -363,6 +363,7 @@ class Voice(object):
 								ipFound=True
 								print line
 								lineDic = line.split(" ")
+								print lineDic
 								ipAddr = lineDic[1].replace("addr:", None)
 								self.speaker.say("The I P is " + ipAddr)
 								print lineDic[1]

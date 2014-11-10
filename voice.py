@@ -253,19 +253,19 @@ class Voice(object):
 
 					#construct start point SUid
 					strStartSUID = strStartBuildingID+strStartLevelID+strStartNodeID
-					print strStartSUID
 					#construct dest SUid
 					strEndSUID = strEndBuildingID+strEndLevelID+strEndNodeID
-					print strEndSUID
 
 					try:
 
 						startSUID = int(strStartSUID)
 						endSUID = int(strEndSUID)
-
+						print startSUID
+						print endSUID
 						#get coord
 						r = requests.get(Locations.HOST_ADDR + "node/?SUID=" +startSUID)
 						for location in r.json():
+							print location
 							startCoord = location['loc']
 
 						self.dispatcherClient.send(9003, "starting", eval(startCoord))

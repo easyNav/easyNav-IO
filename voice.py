@@ -351,21 +351,21 @@ class Voice(object):
 						self.speaker.say("Error, key in a proper ID")
 
 
-				#troubleshooting commands
-			elif (strInput == "*444"):
-				self.speaker.say("Finding ip")
-				os.system("ifconfig wlan0 | grep inet  > myIp.txt")
+					#troubleshooting commands
+				elif (strInput == "*444"):
+					self.speaker.say("Finding ip")
+					os.system("ifconfig wlan0 | grep inet  > myIp.txt")
 
-				with open("myIp.txt") as IPText:
-					for line in IPText:
-						if "inet" in line:
-							line = line.replace("inet", "")
-							line = line.replace("addr:", "")
-							lineDic = line.split(" ")
-							self.mic.say(lineDic[0])
-							print lineDic[0]
+					with open("myIp.txt") as IPText:
+						for line in IPText:
+							if "inet" in line:
+								line = line.replace("inet", "")
+								line = line.replace("addr:", "")
+								lineDic = line.split(" ")
+								self.mic.say(lineDic[0])
+								print lineDic[0]
 
-				time.sleep(0.1)
+					time.sleep(0.1)
 		except:
 			pass
 

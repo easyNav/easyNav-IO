@@ -286,6 +286,7 @@ class Voice(object):
 					del endNodeBuff[:]
 
 				elif (strInput == '*2'):
+					print "note"
 					# startNodeBuff=[]
 					# endNodeBuff=[]
 
@@ -317,6 +318,7 @@ class Voice(object):
 					# del endNodeBuff[:]
 
 				elif (strInput == '*3'):
+					print "note"
 					# self.speaker.say("Stopping previous navigation")
 
 					# endNodeBuff=[]

@@ -360,8 +360,8 @@ class Voice(object):
 						for line in IPText:
 							if "inet" in line:
 								print line
-								line = line.replace("inet", "")
-								line = line.replace("addr:", "")
+								line = line.replace("inet", None)
+								line = line.replace("addr:", None)
 								lineDic = line.split(" ")
 								print lineDic
 								self.mic.say(lineDic[0])

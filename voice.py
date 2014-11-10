@@ -22,13 +22,12 @@ class Notifications(object):
 		# self.dispatcherClient = DispatcherClient(port=self.DISPATCHER_PORT)
 
 		## For collision detection: lock navigation until ready
-        self.collisionLocked = False
-        self.obstacle = None
+		self.collisionLocked = False
+		self.obstacle = None
 
 
-        self.infotosay =None
-
-         ## Attach event listeners
+		self.infotosay =None
+		## Attach event listeners
 		self.attachEvents(self.speaker)
 
 

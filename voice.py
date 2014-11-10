@@ -364,7 +364,9 @@ class Voice(object):
 								print line
 								lineDic = line.split(" ")
 								for word in lineDic:
+									print word
 									if "addr" in word:
+										print "here"
 										ipAddr = word.replace("addr:", None)
 										self.speaker.say("The I P is " + ipAddr)
 										print word

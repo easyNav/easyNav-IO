@@ -344,7 +344,7 @@ class Voice(object):
 							
 							os.system("sudo pkill -SIGTERM -f \"node\" ")
 							time.sleep(1)
-							os.system("sudo sh shutdown.sh")
+							os.system("sudo ./shutdown.sh")
 						else:
 							self.speaker.say("Cancelling")
 

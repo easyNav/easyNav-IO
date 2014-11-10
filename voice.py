@@ -363,10 +363,11 @@ class Voice(object):
 								ipFound=True
 								print line
 								lineDic = line.split(" ")
-								print lineDic
-								ipAddr = lineDic[1].replace("addr:", None)
-								self.speaker.say("The I P is " + ipAddr)
-								print lineDic[1]
+								for word in lineDic:
+									if "addr" in word:
+										ipAddr = word.replace("addr:", None)
+										self.speaker.say("The I P is " + ipAddr)
+										print word
 
 					if(not ipFound):
 						self.speaker.say("No i p assigned")

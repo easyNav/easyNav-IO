@@ -359,6 +359,7 @@ class Voice(object):
 					with open("myIp.txt") as IPText:
 						for line in IPText:
 							if "inet" in line:
+								print line
 								line = line.replace("inet", "")
 								line = line.replace("addr:", "")
 								lineDic = line.split(" ")

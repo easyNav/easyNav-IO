@@ -367,7 +367,7 @@ class Voice(object):
 									print word
 									if "addr" in word:
 										print "here"
-										ipAddr = word.replace("addr:", None)
+										ipAddr = word.replace("addr:", "")
 										self.speaker.say("The I P is " + ipAddr)
 										print word
 

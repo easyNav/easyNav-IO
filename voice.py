@@ -289,10 +289,10 @@ class Voice(object):
 				
 					#find builiding map and get coordinates
 
-					del buildingBuf[:]
-					del levelBuff[:]
-					del startNodeBuff[:]
-					del endNodeBuff[:]
+					#del buildingBuf[:]
+					#del levelBuff[:]
+					#del startNodeBuff[:]
+					#del endNodeBuff[:]
 
 				elif (strInput == '*2'):
 					print "note"

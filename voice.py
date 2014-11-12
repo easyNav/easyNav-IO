@@ -107,6 +107,7 @@ class Notifications(object):
 			elif(self.cruncherAlert == 1 and self.OngoingNav == 1 and regis == 0):
 
 				self.speaker.say(self.cruncherInfotosay)
+				self.cruncherAlert=0
 				self.cruncherInfotosay=None
 
 			else: 

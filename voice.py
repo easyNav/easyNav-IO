@@ -79,7 +79,7 @@ class Notifications(object):
 		while(1):
 
 			## Collision detection first
-			if (self.collisionLocked && self.OngoingNav == 1):
+			if (self.collisionLocked and self.OngoingNav == 1):
 				if (self.obstacle == None):
 					# Unlock collisionLocked
 					self.speaker.say('Obstacle cleared.  Move forward!')

@@ -79,7 +79,7 @@ class Notifications(object):
 		while(1):
 
 			## Collision detection first
-			if (self.collisionLocked and self.OngoingNav == 1):
+			if (self.collisionLocked and self.OngoingNav == 1 and ns.sem == 0):
 				if (self.obstacle == None):
 					# Unlock collisionLocked
 					self.speaker.say('Obstacle cleared.  Move forward!')
@@ -97,7 +97,7 @@ class Notifications(object):
 
 				# Do not execute below
 			else: 
-				if(self.infotosay != None):
+				if(self.infotosay != None and ns.sem == 0):
 					self.speaker.say(self.infotosay)
 					self.infotosay=None
 
@@ -362,6 +362,7 @@ class Voice(object):
 
 					#troubleshooting commands
 				elif (strInput == "*444"):
+					ns.sem = 1 
 					self.speaker.say("Finding i p")
 					os.system("ifconfig wlan0 | grep inet  > myIp.txt")
 					ipFound = False
@@ -382,6 +383,7 @@ class Voice(object):
 
 					if(not ipFound):
 						self.speaker.say("No i p assigned")
+					ns.sem = 0 
 			except:
 				pass
 
@@ -401,6 +403,7 @@ def runNotifications(ns):
 if __name__ == '__main__':
     manager = multiprocessing.Manager()
     ns = manager.Namespace()
+    ns.sem = 0
 
     p1 = multiprocessing.Process(target=runVoice, args=(ns,))
     p1.start()

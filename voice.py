@@ -25,7 +25,7 @@ class Notifications(object):
 		## For collision detection: lock navigation until ready
 		self.collisionLocked = False
 		self.obstacle = None
-
+		self.OngoingNav = 0
 
 		self.infotosay =None
 		## Attach event listeners
@@ -42,7 +42,13 @@ class Notifications(object):
 			infoFromNav = eval(args.get('payload'))
 			print infoFromNav
 			self.infotosay = infoFromNav["text"]
+			if(infoFromNav == 'Retrieved new path.')
+				self.OngoingNav = 1
+			if(infotosay == 'Destination reached!')
+				self.OngoingNav = 0
+
 			print self.infotosay
+
 
 			# print "Info from Nav before Mic"
 			# mic.say(infotosay)
@@ -73,7 +79,7 @@ class Notifications(object):
 		while(1):
 
 			## Collision detection first
-			if (self.collisionLocked):
+			if (self.collisionLocked && self.OngoingNav == 1):
 				if (self.obstacle == None):
 					# Unlock collisionLocked
 					self.speaker.say('Obstacle cleared.  Move forward!')
@@ -401,7 +407,7 @@ if __name__ == '__main__':
     p2.start()
 
     while(1):
-    	time.sleep(0.1)
+    	time.sleep(1)
 
     p1.join()
     p2.join()

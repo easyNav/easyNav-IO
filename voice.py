@@ -104,7 +104,7 @@ class Notifications(object):
 
 				elif (self.obstacle == 'RIGHT'):
 					self.speaker.say('Obstacle on the right!')
-			elif(self.cruncherAlert == 1 self.OngoingNav == 1 and regis == 0):
+			elif(self.cruncherAlert == 1 and self.OngoingNav == 1 and regis == 0):
 
 				self.speaker.say(self.cruncherInfotosay)
 				self.cruncherInfotosay=None

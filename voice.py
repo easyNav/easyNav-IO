@@ -42,9 +42,9 @@ class Notifications(object):
 			infoFromNav = eval(args.get('payload'))
 			print infoFromNav
 			self.infotosay = infoFromNav["text"]
-			if(infoFromNav == 'Retrieved new path.'):
+			if(self.infoFromNav == 'Retrieved new path.'):
 				self.OngoingNav = 1
-			if(infotosay == 'Destination reached!'):
+			if(self.infotosay == 'Destination reached!'):
 				self.OngoingNav = 0
 
 			print self.infotosay

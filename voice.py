@@ -184,9 +184,9 @@ class Voice(object):
 		#self.presentMenu();
 
 		#keep listening for keypad activity
-		try:
 
-			while(1):
+		while(1):
+			try:
 				self.inputBuffer = KeypadLogic.getInput(self.speaker)
 
 
@@ -291,8 +291,8 @@ class Voice(object):
 
 					#del buildingBuf[:]
 					#del levelBuff[:]
-					#del startNodeBuff[:]
-					#del endNodeBuff[:]
+					del startNodeBuff[:]
+					del endNodeBuff[:]
 
 				elif (strInput == '*2'):
 					print "note"
@@ -382,10 +382,11 @@ class Voice(object):
 
 					if(not ipFound):
 						self.speaker.say("No i p assigned")
+			except:
+				pass
 
-					time.sleep(0.1)
-		except:
-			pass
+			time.sleep(0.1)
+	
 
 
 def runVoice(ns):

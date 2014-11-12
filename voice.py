@@ -26,8 +26,10 @@ class Notifications(object):
 		self.collisionLocked = False
 		self.obstacle = None
 		self.OngoingNav = 0
+		self.cruncherAlert = 0
 
 		self.infotosay =None
+		self.cruncherInfotosay=""
 		## Attach event listeners
 		self.attachEvents(self.speaker)
 
@@ -49,9 +51,16 @@ class Notifications(object):
 
 			print self.infotosay
 
+		@smokesignal.on('cruncherAlert')
+		def onSay(args):
+			print "Info from Nav"
+			infoFromCruncher = eval(args.get('payload'))
+			print infoFromCruncher
+			self.cruncherInfotosay = infoFromCruncher["text"]
+			self.cruncherAlert = 1
 
-			# print "Info from Nav before Mic"
-			# mic.say(infotosay)
+			print self.cruncherInfotosay
+
 
 		@smokesignal.on('obstacle')
 		def onObstacle(args):
@@ -95,8 +104,11 @@ class Notifications(object):
 
 				elif (self.obstacle == 'RIGHT'):
 					self.speaker.say('Obstacle on the right!')
+			elif(self.cruncherAlert == 1 self.OngoingNav == 1 and regis == 0):
 
-				# Do not execute below
+				self.speaker.say(self.cruncherInfotosay)
+				self.cruncherInfotosay=None
+
 			else: 
 				if(self.infotosay != None and regis == 0):
 					self.speaker.say(self.infotosay)

@@ -77,9 +77,10 @@ class Notifications(object):
 		
 		#run notifier forever
 		while(1):
+			regis = ns.sem
 
 			## Collision detection first
-			if (self.collisionLocked and self.OngoingNav == 1 and ns.sem == 0):
+			if (self.collisionLocked and self.OngoingNav == 1 and regis == 0):
 				if (self.obstacle == None):
 					# Unlock collisionLocked
 					self.speaker.say('Obstacle cleared.  Move forward!')
@@ -97,7 +98,7 @@ class Notifications(object):
 
 				# Do not execute below
 			else: 
-				if(self.infotosay != None and ns.sem == 0):
+				if(self.infotosay != None and regis == 0):
 					self.speaker.say(self.infotosay)
 					self.infotosay=None
 
@@ -363,6 +364,7 @@ class Voice(object):
 					#troubleshooting commands
 				elif (strInput == "*444"):
 					ns.sem = 1 
+					regis = ns.sem
 					self.speaker.say("Finding i p")
 					os.system("ifconfig wlan0 | grep inet  > myIp.txt")
 					ipFound = False
@@ -384,6 +386,7 @@ class Voice(object):
 					if(not ipFound):
 						self.speaker.say("No i p assigned")
 					ns.sem = 0 
+					regis = ns.sem
 			except:
 				pass
 

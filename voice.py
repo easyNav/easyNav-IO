@@ -354,8 +354,8 @@ class Voice(object):
 
 				elif (strInput == '*333'):
 					self.speaker.say("Restarting Nav and Voice")
-					os.system("sudo pkill -SIGTERM -f \"navigation\"")
-
+					os.system("sudo pkill -SIGTERM -f \"nav\"")
+					os.system("sudo pkill -SIGTERM -f \"voice\"")
 
 					
 
@@ -374,7 +374,7 @@ class Voice(object):
 							
 							os.system("sudo pkill -SIGTERM -f \"node\" ")
 							time.sleep(1)
-							os.system("sh shutdown.sh")
+							os.system("sudo sh shutdown.sh")
 						else:
 							self.speaker.say("Cancelling")
 

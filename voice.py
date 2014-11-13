@@ -98,7 +98,7 @@ class Notifications(object):
 				if (self.collisionLocked and self.OngoingNav == 1 and regis == 0):
 					if (self.obstacle == None):
 						# Unlock collisionLocked
-						self.speaker.say('Obstacle cleared.  Move forward!')
+						self.speaker.say('Obstacle cleared.')
 						self.collisionLocked = False
 
 
@@ -211,7 +211,7 @@ class Voice(object):
 			try:
 				self.inputBuffer = KeypadLogic.getInput(self.speaker)
 				strInput = ''.join(self.inputBuffer)
-				
+
 				print strInput
 
 				if (strInput == '*1'):

@@ -307,7 +307,6 @@ class Voice(object):
 					except:
 						self.speaker.say("Invalid ID")
 
-
 				
 					#find builiding map and get coordinates
 
@@ -353,9 +352,11 @@ class Voice(object):
 
 
 				elif (strInput == '*333'):
+					ns.sem=1
 					self.speaker.say("Restarting Nav and Voice")
 					os.system("sudo pkill -SIGTERM -f \"nav\"")
 					os.system("sudo pkill -SIGTERM -f \"voice\"")
+					ns.sem=0
 
 					
 

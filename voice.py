@@ -12,12 +12,6 @@ import requests
 import os
 
 
-class Notifier(object):
-	def __init__(self):
-
-	def start(self):
-
-
 class Notifications(object):
 
 	def __init__(self):

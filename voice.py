@@ -210,11 +210,9 @@ class Voice(object):
 		while(1):
 			try:
 				self.inputBuffer = KeypadLogic.getInput(self.speaker)
-				print "Input Buffer: " + self.inputBuffer
-				ns.sem=1
 				strInput = ''.join(self.inputBuffer)
+				
 				print strInput
-				ns.sem=0
 
 				if (strInput == '*1'):
 

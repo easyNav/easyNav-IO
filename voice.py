@@ -12,6 +12,11 @@ import requests
 import os
 
 
+class Notifier(object):
+	def __init__(self):
+
+	def start(self):
+
 
 class Notifications(object):
 
@@ -54,6 +59,7 @@ class Notifications(object):
 		@smokesignal.on('cruncherAlert')
 		def onSay(args):
 			print "Info from Nav"
+			os.system("sudo pkill -SIGTERM -f \"aplay\"")
 			infoFromCruncher = eval(args.get('payload'))
 			print infoFromCruncher
 			self.cruncherInfotosay = infoFromCruncher["text"]
@@ -76,44 +82,46 @@ class Notifications(object):
 				self.obstacle = 'RIGHT'
 
 			# If collision, set to true
+			os.system("sudo pkill -SIGTERM -f \"aplay\"")
 			self.collisionLocked = True
 
 	def start(self):
 		self.dispatcherClient.start()
-
-		# self.collisionLocked = False
-		# self.obstacle = None
 		
 		#run notifier forever
+
 		while(1):
-			regis = ns.sem
+			try:
+				regis = ns.sem
 
-			## Collision detection first
-			if (self.collisionLocked and self.OngoingNav == 1 and regis == 0):
-				if (self.obstacle == None):
-					# Unlock collisionLocked
-					self.speaker.say('Obstacle cleared.  Move forward!')
-					self.collisionLocked = False
-					time.sleep(2)
+				## Collision detection first
+				if (self.collisionLocked and self.OngoingNav == 1 and regis == 0):
+					if (self.obstacle == None):
+						# Unlock collisionLocked
+						self.speaker.say('Obstacle cleared.  Move forward!')
+						self.collisionLocked = False
 
-				elif (self.obstacle == 'FRONT'):
-					self.speaker.say('Obstacle ahead.  Turn 45 degrees left or right!')
 
-				elif (self.obstacle == 'LEFT'):
-					self.speaker.say('Obstacle on the left!')
+					elif (self.obstacle == 'FRONT'):
+						self.speaker.say('Obstacle ahead.  Turn 45 degrees left or right!')
 
-				elif (self.obstacle == 'RIGHT'):
-					self.speaker.say('Obstacle on the right!')
-			elif(self.cruncherAlert == 1 and self.OngoingNav == 1 and regis == 0):
+					elif (self.obstacle == 'LEFT'):
+						self.speaker.say('Obstacle on the left!')
 
-				self.speaker.say(self.cruncherInfotosay)
-				self.cruncherAlert=0
-				self.cruncherInfotosay=None
+					elif (self.obstacle == 'RIGHT'):
+						self.speaker.say('Obstacle on the right!')
+				elif(self.cruncherAlert == 1 and self.OngoingNav == 1 and regis == 0):
 
-			else: 
-				if(self.infotosay != None and regis == 0):
-					self.speaker.say(self.infotosay)
-					self.infotosay=None
+					self.speaker.say(self.cruncherInfotosay)
+					self.cruncherAlert=0
+					self.cruncherInfotosay=None
+
+				else: 
+					if(self.infotosay != None and regis == 0):
+						self.speaker.say(self.infotosay)
+						self.infotosay=None
+			except:
+				pass
 
 			time.sleep(0.1)
 
@@ -303,53 +311,53 @@ class Voice(object):
 				
 					#find builiding map and get coordinates
 
-					#del buildingBuf[:]
-					#del levelBuff[:]
-					del startNodeBuff[:]
-					del endNodeBuff[:]
 
 				elif (strInput == '*2'):
 					print "note"
-					# startNodeBuff=[]
-					# endNodeBuff=[]
+					startNodeBuff=[]
+					endNodeBuff=[]
 
-					# self.speaker.say("Key in start point ID")
-					# startNodeBuff = KeypadLogic.getInput(self.speaker)
-					# strStart = ''.join(startNodeBuff)
-					# self.speaker.say("you have entered " + strStart)
-					# print strStart
+					self.speaker.say("Key in start point ID")
+					startNodeBuff = KeypadLogic.getInput(self.speaker)
+					strStart = ''.join(startNodeBuff)
+					self.speaker.say("you have entered " + strStart)
+					print strStart
 
-					# self.speaker.say("Key in destination ID")
-					# endNodeBuff = KeypadLogic.getInput(self.speaker)
-					# strEnd = ''.join(endNodeBuff)
-					# self.speaker.say("you have entered " + strEnd)
+					self.speaker.say("Key in destination ID")
+					endNodeBuff = KeypadLogic.getInput(self.speaker)
+					strEnd = ''.join(endNodeBuff)
+					self.speaker.say("you have entered " + strEnd)
 
-					# #get start coord to send to Cruncher
-					# print "before getSUID"
-					# fileIndex = self.getSUIDIndex(int(strStart))
-					# startCoord = self.getCoord(fileIndex)
-					# print startCoord
+					try:
 
-					# try:
+						startSUID = int(strStart)
+						endSUID = int(strEnd)
+						print startSUID
+						print endSUID
 
-					# 	self.dispatcherClient.send(9003, "starting", eval(startCoord))
-					# 	self.dispatcherClient.send(9001, "newPath", {"from":int(strStart), "to": int(strEnd)})
-					# except ValueError:
-					# 	self.speaker.say("Error, key in a proper ID")
+						#get coord
+						r = requests.get(Voice.HOST_ADDR + "node/?SUID=" + strStart)	
+						print r
 
-					# del startNodeBuff[:]
-					# del endNodeBuff[:]
+						for location in r.json():
+							print location
+							startCoord = location['loc']
+							print startCoord
 
-				elif (strInput == '*3'):
-					print "note"
-					# self.speaker.say("Stopping previous navigation")
+						self.dispatcherClient.send(9003, "starting", eval(startCoord))
+						self.dispatcherClient.send(9001, "newPath", {"from":startSUID, "to": endSUID})
+						self.speaker.say("Routing!")
 
-					# endNodeBuff=[]
+					except:
+						self.speaker.say("Invalid ID")
 
-					# self.speaker.say("Key in destination ID")
-					# endNodeBuff = KeypadLogic.getInput(self.speaker)
 
-					# del endNodeBuff[:]
+				elif (strInput == '*333'):
+					self.speaker.say("Restarting Nav and Voice")
+					os.system("sudo pkill -SIGTERM -f \"navigation\"")
+
+
+					
 
 				elif (strInput == '*4'):
 					self.speaker.say("Ending EasyNav, Are you sure?")
@@ -376,8 +384,8 @@ class Voice(object):
 
 					#troubleshooting commands
 				elif (strInput == "*444"):
+					#lock speech mechanism
 					ns.sem = 1 
-					regis = ns.sem
 					self.speaker.say("Finding i p")
 					os.system("ifconfig wlan0 | grep inet  > myIp.txt")
 					ipFound = False
@@ -398,14 +406,14 @@ class Voice(object):
 
 					if(not ipFound):
 						self.speaker.say("No i p assigned")
+
+					#unlock speech mechanism
 					ns.sem = 0 
-					regis = ns.sem
 			except:
 				pass
 
 			time.sleep(0.1)
 	
-
 
 def runVoice(ns):
 	voice = Voice()
@@ -419,7 +427,7 @@ def runNotifications(ns):
 if __name__ == '__main__':
     manager = multiprocessing.Manager()
     ns = manager.Namespace()
-    ns.sem = 0
+    ns.sem = 0 
 
     p1 = multiprocessing.Process(target=runVoice, args=(ns,))
     p1.start()

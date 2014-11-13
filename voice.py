@@ -211,10 +211,11 @@ class Voice(object):
 			try:
 				self.inputBuffer = KeypadLogic.getInput(self.speaker)
 
-
+				ns.sem=1
 				strInput = ''.join(self.inputBuffer)
 				print strInput
-
+				ns.sem=0
+				
 				if (strInput == '*1'):
 
 					startBuildingBuf = []
@@ -358,8 +359,6 @@ class Voice(object):
 					os.system("sudo pkill -SIGTERM -f \"voice\"")
 					ns.sem=0
 
-					
-
 				elif (strInput == '*4'):
 					self.speaker.say("Ending EasyNav, Are you sure?")
 					self.speaker.say("Key in 1 to confirm, 2 to cancel")
@@ -382,8 +381,7 @@ class Voice(object):
 					except ValueError:
 						self.speaker.say("Error, key in a proper ID")
 
-
-					#troubleshooting commands
+				#troubleshooting commands
 				elif (strInput == "*444"):
 					#lock speech mechanism
 					ns.sem = 1 

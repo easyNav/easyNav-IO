@@ -59,7 +59,7 @@ class Notifications(object):
 		@smokesignal.on('cruncherAlert')
 		def onSay(args):
 			print "Info from Nav"
-			os.system("sudo pkill -SIGTERM -f \"aplay\"")
+			os.system("sudo pkill -SIGTERM -f \"aplay\" ")
 			infoFromCruncher = eval(args.get('payload'))
 			print infoFromCruncher
 			self.cruncherInfotosay = infoFromCruncher["text"]
@@ -82,7 +82,7 @@ class Notifications(object):
 				self.obstacle = 'RIGHT'
 
 			# If collision, set to true
-			os.system("sudo pkill -SIGTERM -f \"aplay\"")
+			os.system("sudo pkill -SIGTERM -f \"aplay\" ")
 			self.collisionLocked = True
 
 	def start(self):

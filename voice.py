@@ -69,7 +69,7 @@ class Notifications(object):
 			response = int(json.loads(args.get('payload')).get('status'))
 			if (response == 0):
 				self.obstacle = None
-				return # Do not set collision locked
+				self.collisionLocked = False
 			elif (response == 1):
 				self.obstacle = 'FRONT'
 				self.collisionLocked = True

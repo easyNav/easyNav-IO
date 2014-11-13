@@ -72,15 +72,18 @@ class Notifications(object):
 				return # Do not set collision locked
 			elif (response == 1):
 				self.obstacle = 'FRONT'
+				self.collisionLocked = True
 			elif (response == 2):
 				self.obstacle = 'LEFT'
+				self.collisionLocked = True
 			elif (response == 3):
 				self.obstacle = 'RIGHT'
+				self.collisionLocked = True
 
 			# If collision, set to true
 			if(self.OngoingNav==1 and not self.collisionLocked):
 				os.system("sudo pkill -SIGTERM -f \"aplay\" ")
-			self.collisionLocked = True
+			#self.collisionLocked = True
 
 	def start(self):
 		self.dispatcherClient.start()

@@ -78,7 +78,7 @@ class Notifications(object):
 				self.obstacle = 'RIGHT'
 
 			# If collision, set to true
-			if(self.OngoingNav==1):
+			if(self.OngoingNav==1 and not self.collisionLocked):
 				os.system("sudo pkill -SIGTERM -f \"aplay\" ")
 			self.collisionLocked = True
 

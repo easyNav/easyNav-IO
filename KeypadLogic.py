@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import speaker
+import os
 
 def getInput(mic):
 
@@ -39,6 +40,7 @@ def getInput(mic):
 						print MATRIX[i][j]
 						if(MATRIX[i][j] != '#'):			 	#not the end yet
 							inputId.append(MATRIX[i][j])
+							os.system("sudo pkill -SIGTERM -f \"aplay\" ")
 							mic.say(MATRIX[i][j])
 						else:
 							print inputId

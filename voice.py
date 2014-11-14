@@ -378,7 +378,7 @@ class Voice(object):
 				elif(strInput == '*55'):
 					ns.sem=1
 					self.speaker.say("Resuming Nav")
-					self.dispatcherClient.send(9001, "unpause"{"text": None})
+					self.dispatcherClient.send(9001, "unpause", {"text": None})
 					ns.sem=0
 
 				elif (strInput == '*4'):

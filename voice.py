@@ -38,15 +38,24 @@ class Notifications(object):
 		smokesignal.clear()
 		text = ""
 		@smokesignal.on('say')
-		def onSay(args):
+		def onSay(args):	
 			print "Info from Nav"
 			infoFromNav = eval(args.get('payload'))
 			print infoFromNav
 			self.infotosay = infoFromNav["text"]
 			if(self.infotosay == 'Retrieved new path.'):
 				self.OngoingNav = 1
-			if(self.infotosay == 'Destination reached!'):
+			if "Destination" in self.infotosay:
 				self.OngoingNav = 0
+
+			if "reset" in self.infotosay:
+				self.OngoingNav = 0
+
+			if "paused" in self.infotosay:
+				self.OngoingNav = 0
+
+			if "resumed" in self.infotosay:
+				self.OngoingNav=1
 
 			print self.infotosay
 
@@ -84,6 +93,8 @@ class Notifications(object):
 			if(self.OngoingNav==1 and not self.collisionLocked):
 				os.system("sudo pkill -SIGTERM -f \"aplay\" ")
 			#self.collisionLocked = True
+
+
 
 	def start(self):
 		self.dispatcherClient.start()
@@ -350,11 +361,24 @@ class Voice(object):
 						self.speaker.say("Invalid ID")
 
 
-				elif (strInput == '*333'):
+				elif (strInput == '*33'):
 					ns.sem=1
-					self.speaker.say("Restarting Nav and Voice")
-					os.system("sudo pkill -SIGTERM -f \"nav\"")
-					os.system("sudo pkill -SIGTERM -f \"voice\"")
+					self.speaker.say("Resetting Nav")
+					self.dispatcherClient.send(9001, "reset", {"text": None})
+					# os.system("sudo pkill -SIGTERM -f \"nav\"")
+					# os.system("sudo pkill -SIGTERM -f \"voice\"")
+					ns.sem=0
+
+				elif(strInput == '*44'):
+					ns.sem=1
+					self.speaker.say("Pausing Nav")
+					self.dispatcherClient.send(9001, "pause", {"text": None})
+					ns.sem=0
+
+				elif(strInput == '*55'):
+					ns.sem=1
+					self.speaker.say("Resuming Nav")
+					self.dispatcherClient.send(9001, "unpause"{"text": None})
 					ns.sem=0
 
 				elif (strInput == '*4'):
@@ -380,7 +404,7 @@ class Voice(object):
 						self.speaker.say("Error, key in a proper ID")
 
 				#troubleshooting commands
-				elif (strInput == "*444"):
+				elif (strInput == "*66"):
 					#lock speech mechanism
 					ns.sem = 1 
 					self.speaker.say("Finding i p")

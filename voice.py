@@ -224,13 +224,13 @@ class Voice(object):
 
 		while(1):
 			try:
-				self.checkNavigation = [ns.OngoingNavigation]
+				self.checkNavigation[0] = ns.OngoingNavigation
+				print self.checkNavigation
+
 				self.inputBuffer = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 				strInput = ''.join(self.inputBuffer)
 
-				# if(checkNavigation== 1 and strInput != ''):
-				# 	self.speaker.say("Pausing Nav")
-				# 	self.dispatcherClient.send(9001, "pause", {"text": None})
+
 
 				print strInput
 

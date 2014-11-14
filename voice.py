@@ -26,9 +26,9 @@ class Notifications(object):
 		self.obstacle = None
 		self.OngoingNav = 0
 		self.cruncherAlert = 0
-
 		self.infotosay =None
 		self.cruncherInfotosay=""
+
 		## Attach event listeners
 		self.attachEvents(self.speaker)
 
@@ -45,17 +45,19 @@ class Notifications(object):
 			self.infotosay = infoFromNav["text"]
 			if(self.infotosay == 'Retrieved new path.'):
 				self.OngoingNav = 1
+				ns.OngoingNavigation = 1
 			if "Destination" in self.infotosay:
 				self.OngoingNav = 0
-
+				ns.OngoingNavigation = 0
 			if "reset" in self.infotosay:
 				self.OngoingNav = 0
-
+				ns.OngoingNavigation = 0
 			if "paused" in self.infotosay:
 				self.OngoingNav = 0
-
+				ns.OngoingNavigation = 0
 			if "resumed" in self.infotosay:
 				self.OngoingNav=1
+				ns.OngoingNavigation = 1
 
 			print self.infotosay
 
@@ -220,10 +222,11 @@ class Voice(object):
 
 		while(1):
 			try:
+				checkNavigation = ns.OngoingNavigation
 				self.inputBuffer = KeypadLogic.getInput(self.speaker)
 				strInput = ''.join(self.inputBuffer)
 
-				if(self.OngoingNav == 1 and strInput != ''):
+				if(checkNavigation== 1 and strInput != ''):
 					self.speaker.say("Pausing Nav")
 					self.dispatcherClient.send(9001, "pause", {"text": None})
 
@@ -375,11 +378,6 @@ class Voice(object):
 					# os.system("sudo pkill -SIGTERM -f \"voice\"")
 					ns.sem=0
 
-				# elif(strInput == '*44'):
-				# 	ns.sem=1
-				# 	self.speaker.say("Pausing Nav")
-				# 	self.dispatcherClient.send(9001, "pause", {"text": None})
-				# 	ns.sem=0
 
 				elif(strInput == '*55'):
 					ns.sem=1
@@ -455,6 +453,7 @@ if __name__ == '__main__':
     manager = multiprocessing.Manager()
     ns = manager.Namespace()
     ns.sem = 0 
+    ns.OngoingNavigation = 0
 
     p1 = multiprocessing.Process(target=runVoice, args=(ns,))
     p1.start()

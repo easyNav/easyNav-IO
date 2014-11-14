@@ -244,7 +244,7 @@ class Voice(object):
 
 
 					self.speaker.say("Key in start building ID, one for com one, two for com two")
-					startBuildingBuf = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
+					startBuildingBuf = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 					strStartBuildingID = ''.join(startBuildingBuf)
 					
 					if(self.isCancel(strStartBuildingID)):
@@ -254,7 +254,7 @@ class Voice(object):
 
 
 					self.speaker.say("Key in start level ID, zero is basement.")
-					startLevelBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
+					startLevelBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 					strStartLevelID = ''.join(startLevelBuff)
 
 					if(self.isCancel(strStartLevelID)):
@@ -264,7 +264,7 @@ class Voice(object):
 
 
 					self.speaker.say("Key in start node ID")
-					startNodeBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
+					startNodeBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 					strStartNodeID = ''.join(startNodeBuff)
 					if(self.isCancel(strStartNodeID)):
 						continue
@@ -273,7 +273,7 @@ class Voice(object):
 
 
 					self.speaker.say("Key in destination building ID ")
-					endBuildingBuf = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
+					endBuildingBuf = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 					strEndBuildingID = ''.join(endBuildingBuf)
 					if(self.isCancel(strEndBuildingID)):
 						continue
@@ -281,7 +281,7 @@ class Voice(object):
 						self.speaker.say("you have entered building " + strEndBuildingID)
 
 					self.speaker.say("Key in destination level ID")
-					endLevelBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
+					endLevelBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 					strEndLevelID = ''.join(endLevelBuff)
 					if(self.isCancel(strEndLevelID)):
 						continue
@@ -289,7 +289,7 @@ class Voice(object):
 						self.speaker.say("you have entered level " + strEndLevelID)
 
 					self.speaker.say("Key in destination node ID")
-					endNodeBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
+					endNodeBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 					strEndNodeID = ''.join(endNodeBuff)
 					if(self.isCancel(strEndNodeID)):
 						continue
@@ -334,13 +334,13 @@ class Voice(object):
 					endNodeBuff=[]
 
 					self.speaker.say("Key in start point ID")
-					startNodeBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
+					startNodeBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 					strStart = ''.join(startNodeBuff)
 					self.speaker.say("you have entered " + strStart)
 					print strStart
 
 					self.speaker.say("Key in destination ID")
-					endNodeBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
+					endNodeBuff = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 					strEnd = ''.join(endNodeBuff)
 					self.speaker.say("you have entered " + strEnd)
 
@@ -387,7 +387,7 @@ class Voice(object):
 					self.speaker.say("Ending EasyNav, Are you sure?")
 					self.speaker.say("Key in 1 to confirm, 2 to cancel")
 
-					option = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
+					option = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 					strOption = ''.join(option)
 					try:
 						if(strOption == '1'):

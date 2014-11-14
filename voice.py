@@ -222,6 +222,10 @@ class Voice(object):
 			try:
 				self.inputBuffer = KeypadLogic.getInput(self.speaker)
 				strInput = ''.join(self.inputBuffer)
+				
+				if(self.OngoingNav == 1 and strInput != '')
+					self.speaker.say("Pausing Nav")
+					self.dispatcherClient.send(9001, "pause", {"text": None})
 
 				print strInput
 
@@ -326,6 +330,8 @@ class Voice(object):
 					startNodeBuff=[]
 					endNodeBuff=[]
 
+
+
 					self.speaker.say("Key in start point ID")
 					startNodeBuff = KeypadLogic.getInput(self.speaker)
 					strStart = ''.join(startNodeBuff)
@@ -369,11 +375,11 @@ class Voice(object):
 					# os.system("sudo pkill -SIGTERM -f \"voice\"")
 					ns.sem=0
 
-				elif(strInput == '*44'):
-					ns.sem=1
-					self.speaker.say("Pausing Nav")
-					self.dispatcherClient.send(9001, "pause", {"text": None})
-					ns.sem=0
+				# elif(strInput == '*44'):
+				# 	ns.sem=1
+				# 	self.speaker.say("Pausing Nav")
+				# 	self.dispatcherClient.send(9001, "pause", {"text": None})
+				# 	ns.sem=0
 
 				elif(strInput == '*55'):
 					ns.sem=1

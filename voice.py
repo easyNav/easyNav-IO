@@ -12,6 +12,7 @@ import requests
 import os
 
 
+
 class Notifications(object):
 
 	def __init__(self):
@@ -223,12 +224,12 @@ class Voice(object):
 		while(1):
 			try:
 				checkNavigation = ns.OngoingNavigation
-				self.inputBuffer = KeypadLogic.getInput(self.speaker)
+				self.inputBuffer = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
 				strInput = ''.join(self.inputBuffer)
 
-				if(checkNavigation== 1 and strInput != ''):
-					self.speaker.say("Pausing Nav")
-					self.dispatcherClient.send(9001, "pause", {"text": None})
+				# if(checkNavigation== 1 and strInput != ''):
+				# 	self.speaker.say("Pausing Nav")
+				# 	self.dispatcherClient.send(9001, "pause", {"text": None})
 
 				print strInput
 

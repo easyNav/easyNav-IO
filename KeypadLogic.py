@@ -42,9 +42,11 @@ def getInput(mic, dispatcher):
 						if(MATRIX[i][j] != '#'):			 	#not the end yet
 							inputId.append(MATRIX[i][j])
 							mic.say(MATRIX[i][j])
+							
+							print ONGOINGNAV
+
 							if(ONGOINGNAV == 1):
 								dispatcher.send(9001, "pause", {"text": None})
-
 
 						else:
 							print inputId

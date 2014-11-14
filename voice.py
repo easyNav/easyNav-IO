@@ -48,7 +48,7 @@ class Notifications(object):
 			try:
 				if(self.infotosay != None and self.infotosay == 'Retrieved new path.'):
 					self.OngoingNav = 1
-					self.speaker.say(self.infotosay)
+					#self.speaker.say(self.infotosay)
 				if self.infotosay != None and "Destination" in self.infotosay:
 					self.OngoingNav = 0
 					self.speaker.say(self.infotosay)
@@ -69,15 +69,19 @@ class Notifications(object):
 		@smokesignal.on('cruncherAlert')
 		def onSay(args):
 			print "Info from Nav"
-			if(self.OngoingNav == 1):
-				os.system("sudo pkill -SIGTERM -f \"aplay\" ")
+			try:
+				if(self.OngoingNav == 1):
+					os.system("sudo pkill -SIGTERM -f \"aplay\" ")
 
-			infoFromCruncher = eval(args.get('payload'))
-			print infoFromCruncher
-			self.cruncherInfotosay = infoFromCruncher["text"]
-			self.cruncherAlert = 1
+				infoFromCruncher = eval(args.get('payload'))
+				print infoFromCruncher
+				self.cruncherInfotosay = infoFromCruncher["text"]
+				self.cruncherAlert = 1
 
-			print self.cruncherInfotosay
+				print self.cruncherInfotosay
+			except:
+				pass
+
 
 
 		@smokesignal.on('obstacle')

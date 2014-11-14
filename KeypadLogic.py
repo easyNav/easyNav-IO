@@ -4,7 +4,7 @@ import speaker
 
 
 
-def getInput(mic, dispatcher):
+def getInput(mic, dispatcher, checkNav):
 
 	GPIO.setmode(GPIO.BOARD)
 
@@ -42,8 +42,8 @@ def getInput(mic, dispatcher):
 						if(MATRIX[i][j] != '#'):			 	#not the end yet
 							inputId.append(MATRIX[i][j])
 							mic.say(MATRIX[i][j])
-						
-							dispatcher.send(9001, "pause", {"text": None})
+							if(checkNav[0] == 1):
+								dispatcher.send(9001, "pause", {"text": None})
 						else:
 							print inputId
 

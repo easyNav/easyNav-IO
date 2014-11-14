@@ -152,6 +152,7 @@ class Voice(object):
 		self.dispatcherClient = DispatcherClient(port=self.DISPATCHER_PORT)
 
 		self.inputBuffer =[]
+		self.checkNavigation = []
 
 		#update locations
 		# self.getLocation = GetLocations.Locations()
@@ -223,8 +224,8 @@ class Voice(object):
 
 		while(1):
 			try:
-				checkNavigation = ns.OngoingNavigation
-				self.inputBuffer = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
+				self.checkNavigation = [ns.OngoingNavigation]
+				self.inputBuffer = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 				strInput = ''.join(self.inputBuffer)
 
 				# if(checkNavigation== 1 and strInput != ''):

@@ -2,9 +2,8 @@ import RPi.GPIO as GPIO
 import time
 import speaker
 
-ONGOINGNAV = 0
 
-def getInput(mic, dispatcher):
+def getInput(mic, dispatcher, ONGOINGNAV):
 
 	GPIO.setmode(GPIO.BOARD)
 
@@ -45,7 +44,7 @@ def getInput(mic, dispatcher):
 							
 							print ONGOINGNAV
 
-							if(ONGOINGNAV == 1):
+							if(ONGOINGNAV[0] == 1):
 								dispatcher.send(9001, "pause", {"text": None})
 
 						else:

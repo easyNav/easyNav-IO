@@ -47,24 +47,19 @@ class Notifications(object):
 
 			if(self.infotosay == 'Retrieved new path.'):
 				self.OngoingNav = 1
-				KeypadLogic.ONGOINGNAV = 1
-
+				ns.OngoingNavigation = 1
 			if "Destination" in self.infotosay:
 				self.OngoingNav = 0
-				KeypadLogic.ONGOINGNAV = 0
-
+				ns.OngoingNavigation =0
 			if "reset" in self.infotosay:
 				self.OngoingNav = 0
-				KeypadLogic.ONGOINGNAV = 0
-
+				ns.OngoingNavigation =0
 			if "paused" in self.infotosay:
 				self.OngoingNav = 0
-				KeypadLogic.ONGOINGNAV = 0
-
+				ns.OngoingNavigation =0
 			if "resumed" in self.infotosay:
 				self.OngoingNav=1
-				KeypadLogic.ONGOINGNAV = 1
-
+				ns.OngoingNavigation =1
 			print self.infotosay
 
 		@smokesignal.on('cruncherAlert')
@@ -229,10 +224,10 @@ class Voice(object):
 
 		while(1):
 			try:
-				# self.checkNavigation[0] = ns.OngoingNavigation
-				# print self.checkNavigation
+				self.checkNavigation[0] = ns.OngoingNavigation
+				print self.checkNavigation
 
-				self.inputBuffer = KeypadLogic.getInput(self.speaker, self.dispatcherClient)
+				self.inputBuffer = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
 				strInput = ''.join(self.inputBuffer)
 
 				print strInput

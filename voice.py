@@ -47,8 +47,10 @@ class Notifications(object):
 
 			if(self.infotosay == 'Retrieved new path.'):
 				self.OngoingNav = 1
+				self.speaker.say(self.infotosay)
 			if "Destination" in self.infotosay:
 				self.OngoingNav = 0
+				self.speaker.say(self.infotosay)
 			if "reset" in self.infotosay:
 				self.OngoingNav = 0
 			if "paused" in self.infotosay:
@@ -58,7 +60,7 @@ class Notifications(object):
 
 			if "Checkpoint" in self.infotosay:
 				self.speaker.say(self.infotosay)
-				
+
 			print self.infotosay
 
 		@smokesignal.on('cruncherAlert')

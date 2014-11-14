@@ -45,24 +45,26 @@ class Notifications(object):
 			print infoFromNav
 			self.infotosay = infoFromNav["text"]
 
-			if self.infotosay != None:
-				if(self.infotosay == 'Retrieved new path.'):
+			try:
+				if(self.infotosay != None and self.infotosay == 'Retrieved new path.'):
 					self.OngoingNav = 1
 					self.speaker.say(self.infotosay)
-				if "Destination" in self.infotosay:
+				if self.infotosay != None and "Destination" in self.infotosay:
 					self.OngoingNav = 0
 					self.speaker.say(self.infotosay)
-				if "reset" in self.infotosay:
-					self.OngoingNav = 0
-				if "paused" in self.infotosay:
-					self.OngoingNav = 0
-				if "resumed" in self.infotosay:
-					self.OngoingNav=1
+				# if self.infotosay != None and "reset" in self.infotosay:
+				# 	self.OngoingNav = 0
+				# if "paused" in self.infotosay:
+				# 	self.OngoingNav = 0
+				# if "resumed" in self.infotosay:
+				# 	self.OngoingNav=1
 
-				if "Checkpoint" in self.infotosay:
+				if self.infotosay != None and "Checkpoint" in self.infotosay:
 					self.speaker.say(self.infotosay)
 
 				print self.infotosay
+			except:
+				pass
 
 		@smokesignal.on('cruncherAlert')
 		def onSay(args):

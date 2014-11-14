@@ -3,7 +3,7 @@ import time
 import speaker
 
 
-def getInput(mic, dispatcher, ONGOINGNAV):
+def getInput(mic):
 
 	GPIO.setmode(GPIO.BOARD)
 
@@ -42,10 +42,6 @@ def getInput(mic, dispatcher, ONGOINGNAV):
 							inputId.append(MATRIX[i][j])
 							mic.say(MATRIX[i][j])
 							
-							print ONGOINGNAV
-
-							if(ONGOINGNAV[0] == 1):
-								dispatcher.send(9001, "pause", {"text": None})
 
 						else:
 							print inputId

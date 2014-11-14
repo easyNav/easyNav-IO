@@ -222,8 +222,8 @@ class Voice(object):
 			try:
 				self.inputBuffer = KeypadLogic.getInput(self.speaker)
 				strInput = ''.join(self.inputBuffer)
-				
-				if(self.OngoingNav == 1 and strInput != '')
+
+				if(self.OngoingNav == 1 and strInput != ''):
 					self.speaker.say("Pausing Nav")
 					self.dispatcherClient.send(9001, "pause", {"text": None})
 

@@ -2,9 +2,9 @@ import RPi.GPIO as GPIO
 import time
 import speaker
 
+ONGOINGNAV = 0
 
-
-def getInput(mic):
+def getInput(mic, dispatcher):
 
 	GPIO.setmode(GPIO.BOARD)
 
@@ -28,6 +28,7 @@ def getInput(mic):
 	for i in range(4):
 		GPIO.setup(ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP) #input set as high
 
+	ONGOINGNAV=0
 
 	try:
 		del inputId[:] #clear buffer
@@ -42,6 +43,10 @@ def getInput(mic):
 						if(MATRIX[i][j] != '#'):			 	#not the end yet
 							inputId.append(MATRIX[i][j])
 							mic.say(MATRIX[i][j])
+							if(ONGOINGNAV == 1):
+								dispatcher.send(9001, "pause", {"text": None})
+
+
 						else:
 							print inputId
 

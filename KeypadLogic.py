@@ -28,7 +28,6 @@ def getInput(mic, dispatcher):
 	for i in range(4):
 		GPIO.setup(ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP) #input set as high
 
-	ONGOINGNAV=0
 
 	try:
 		del inputId[:] #clear buffer
@@ -43,7 +42,7 @@ def getInput(mic, dispatcher):
 						if(MATRIX[i][j] != '#'):			 	#not the end yet
 							inputId.append(MATRIX[i][j])
 							mic.say(MATRIX[i][j])
-							if(KeypadLogic.ONGOINGNAV == 1):
+							if(ONGOINGNAV == 1):
 								dispatcher.send(9001, "pause", {"text": None})
 
 

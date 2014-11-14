@@ -46,19 +46,19 @@ class Notifications(object):
 			self.infotosay = infoFromNav["text"]
 			if(self.infotosay == 'Retrieved new path.'):
 				self.OngoingNav = 1
-				ns.OngoingNavigation = 1
+				# ns.OngoingNavigation = 1
 			if "Destination" in self.infotosay:
 				self.OngoingNav = 0
-				ns.OngoingNavigation = 0
+				# ns.OngoingNavigation = 0
 			if "reset" in self.infotosay:
 				self.OngoingNav = 0
-				ns.OngoingNavigation = 0
+				# ns.OngoingNavigation = 0
 			if "paused" in self.infotosay:
 				self.OngoingNav = 0
-				ns.OngoingNavigation = 0
+				# ns.OngoingNavigation = 0
 			if "resumed" in self.infotosay:
 				self.OngoingNav=1
-				ns.OngoingNavigation = 1
+				# ns.OngoingNavigation = 1
 
 			print self.infotosay
 
@@ -224,13 +224,11 @@ class Voice(object):
 
 		while(1):
 			try:
-				self.checkNavigation[0] = ns.OngoingNavigation
-				print self.checkNavigation
+				# self.checkNavigation[0] = ns.OngoingNavigation
+				# print self.checkNavigation
 
-				self.inputBuffer = KeypadLogic.getInput(self.speaker, self.dispatcherClient, self.checkNavigation)
+				self.inputBuffer = KeypadLogic.getInput(self.speaker)
 				strInput = ''.join(self.inputBuffer)
-
-
 
 				print strInput
 
@@ -334,8 +332,6 @@ class Voice(object):
 					print "note"
 					startNodeBuff=[]
 					endNodeBuff=[]
-
-
 
 					self.speaker.say("Key in start point ID")
 					startNodeBuff = KeypadLogic.getInput(self.speaker)

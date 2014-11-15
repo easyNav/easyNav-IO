@@ -86,24 +86,32 @@ class Notifications(object):
 
 		@smokesignal.on('obstacle')
 		def onObstacle(args):
-			response = int(json.loads(args.get('payload')).get('status'))
-			if (response == 0):
-				self.obstacle = None
-				return
-			elif (response == 1):
-				self.obstacle = 'FRONT'
-				self.collisionLocked = True
-			elif (response == 2):
-				self.obstacle = 'LEFT'
-				self.collisionLocked = True
-			elif (response == 3):
-				self.obstacle = 'RIGHT'
-				self.collisionLocked = True
+			try:
+				response = int(json.loads(args.get('payload')).get('status'))
+				if (response == 0):
+					self.obstacle = None
+					return
+				elif (response == 1):
+					self.obstacle = 'FRONT'
+					self.collisionLocked = True
+				elif (response == 2):
+					self.obstacle = 'LEFT'
+					self.collisionLocked = True
+				elif (response == 3):
+					self.obstacle = 'RIGHT'
+					self.collisionLocked = True
 
-			# If collision, set to true
-			if(self.OngoingNav==1 and not self.collisionLocked):
-				os.system("sudo pkill -SIGTERM -f \"aplay\" ")
-			#self.collisionLocked = True
+				# If collision, set to true
+				if(self.OngoingNav==1 and not self.collisionLocked):
+					os.system("sudo pkill -SIGTERM -f \"aplay\" ")
+				#self.collisionLocked = True
+			except:
+				pass
+
+		@smokesignal.on('reset')
+		def onObstacle(args):
+			self.mic.say("Voice reset")
+			self.OngoingNav = 0 #clear ongoing nav
 
 
 

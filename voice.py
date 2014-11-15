@@ -110,7 +110,7 @@ class Notifications(object):
 
 		@smokesignal.on('reset')
 		def onObstacle(args):
-			self.mic.say("Voice reset")
+			self.speaker.say("Voice reset")
 			self.OngoingNav = 0 #clear ongoing nav
 
 
